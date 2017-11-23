@@ -226,6 +226,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2023,7 +2026,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new APIGroup(input, extensionRegistry);
+        return new APIGroup(input, extensionRegistry);
       }
     };
 
@@ -2121,6 +2124,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2899,7 +2905,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new APIGroupList(input, extensionRegistry);
+        return new APIGroupList(input, extensionRegistry);
       }
     };
 
@@ -2996,6 +3002,64 @@ public final class Meta {
      * <code>optional bool namespaced = 2;</code>
      */
     boolean getNamespaced();
+
+    /**
+     * <pre>
+     * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+     * For subresources, this may have a different value, for example: Scale".
+     * </pre>
+     *
+     * <code>optional string group = 8;</code>
+     */
+    boolean hasGroup();
+    /**
+     * <pre>
+     * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+     * For subresources, this may have a different value, for example: Scale".
+     * </pre>
+     *
+     * <code>optional string group = 8;</code>
+     */
+    java.lang.String getGroup();
+    /**
+     * <pre>
+     * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+     * For subresources, this may have a different value, for example: Scale".
+     * </pre>
+     *
+     * <code>optional string group = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getGroupBytes();
+
+    /**
+     * <pre>
+     * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+     * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+     * </pre>
+     *
+     * <code>optional string version = 9;</code>
+     */
+    boolean hasVersion();
+    /**
+     * <pre>
+     * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+     * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+     * </pre>
+     *
+     * <code>optional string version = 9;</code>
+     */
+    java.lang.String getVersion();
+    /**
+     * <pre>
+     * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+     * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+     * </pre>
+     *
+     * <code>optional string version = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getVersionBytes();
 
     /**
      * <pre>
@@ -3141,6 +3205,8 @@ public final class Meta {
       name_ = "";
       singularName_ = "";
       namespaced_ = false;
+      group_ = "";
+      version_ = "";
       kind_ = "";
       shortNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       categories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -3156,6 +3222,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -3187,13 +3256,13 @@ public final class Meta {
             }
             case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000020;
               kind_ = bs;
               break;
             }
             case 34: {
               io.kubernetes.client.proto.Meta.Verbs.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
                 subBuilder = verbs_.toBuilder();
               }
               verbs_ = input.readMessage(io.kubernetes.client.proto.Meta.Verbs.PARSER, extensionRegistry);
@@ -3201,14 +3270,14 @@ public final class Meta {
                 subBuilder.mergeFrom(verbs_);
                 verbs_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000040;
               break;
             }
             case 42: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 shortNames_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000080;
               }
               shortNames_.add(bs);
               break;
@@ -3221,11 +3290,23 @@ public final class Meta {
             }
             case 58: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 categories_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000100;
               }
               categories_.add(bs);
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              group_ = bs;
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              version_ = bs;
               break;
             }
           }
@@ -3236,10 +3317,10 @@ public final class Meta {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           shortNames_ = shortNames_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           categories_ = categories_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -3396,6 +3477,120 @@ public final class Meta {
       return namespaced_;
     }
 
+    public static final int GROUP_FIELD_NUMBER = 8;
+    private volatile java.lang.Object group_;
+    /**
+     * <pre>
+     * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+     * For subresources, this may have a different value, for example: Scale".
+     * </pre>
+     *
+     * <code>optional string group = 8;</code>
+     */
+    public boolean hasGroup() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+     * For subresources, this may have a different value, for example: Scale".
+     * </pre>
+     *
+     * <code>optional string group = 8;</code>
+     */
+    public java.lang.String getGroup() {
+      java.lang.Object ref = group_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          group_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+     * For subresources, this may have a different value, for example: Scale".
+     * </pre>
+     *
+     * <code>optional string group = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGroupBytes() {
+      java.lang.Object ref = group_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        group_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int VERSION_FIELD_NUMBER = 9;
+    private volatile java.lang.Object version_;
+    /**
+     * <pre>
+     * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+     * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+     * </pre>
+     *
+     * <code>optional string version = 9;</code>
+     */
+    public boolean hasVersion() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+     * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+     * </pre>
+     *
+     * <code>optional string version = 9;</code>
+     */
+    public java.lang.String getVersion() {
+      java.lang.Object ref = version_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          version_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+     * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+     * </pre>
+     *
+     * <code>optional string version = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getVersionBytes() {
+      java.lang.Object ref = version_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        version_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int KIND_FIELD_NUMBER = 3;
     private volatile java.lang.Object kind_;
     /**
@@ -3406,7 +3601,7 @@ public final class Meta {
      * <code>optional string kind = 3;</code>
      */
     public boolean hasKind() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <pre>
@@ -3461,7 +3656,7 @@ public final class Meta {
      * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.Verbs verbs = 4;</code>
      */
     public boolean hasVerbs() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <pre>
@@ -3594,10 +3789,10 @@ public final class Meta {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(2, namespaced_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, kind_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeMessage(4, getVerbs());
       }
       for (int i = 0; i < shortNames_.size(); i++) {
@@ -3608,6 +3803,12 @@ public final class Meta {
       }
       for (int i = 0; i < categories_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 7, categories_.getRaw(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, group_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, version_);
       }
       unknownFields.writeTo(output);
     }
@@ -3624,10 +3825,10 @@ public final class Meta {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(2, namespaced_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, kind_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getVerbs());
       }
@@ -3649,6 +3850,12 @@ public final class Meta {
         }
         size += dataSize;
         size += 1 * getCategoriesList().size();
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, group_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, version_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3680,6 +3887,16 @@ public final class Meta {
       if (hasNamespaced()) {
         result = result && (getNamespaced()
             == other.getNamespaced());
+      }
+      result = result && (hasGroup() == other.hasGroup());
+      if (hasGroup()) {
+        result = result && getGroup()
+            .equals(other.getGroup());
+      }
+      result = result && (hasVersion() == other.hasVersion());
+      if (hasVersion()) {
+        result = result && getVersion()
+            .equals(other.getVersion());
       }
       result = result && (hasKind() == other.hasKind());
       if (hasKind()) {
@@ -3718,6 +3935,14 @@ public final class Meta {
         hash = (37 * hash) + NAMESPACED_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
             getNamespaced());
+      }
+      if (hasGroup()) {
+        hash = (37 * hash) + GROUP_FIELD_NUMBER;
+        hash = (53 * hash) + getGroup().hashCode();
+      }
+      if (hasVersion()) {
+        hash = (37 * hash) + VERSION_FIELD_NUMBER;
+        hash = (53 * hash) + getVersion().hashCode();
       }
       if (hasKind()) {
         hash = (37 * hash) + KIND_FIELD_NUMBER;
@@ -3875,18 +4100,22 @@ public final class Meta {
         bitField0_ = (bitField0_ & ~0x00000002);
         namespaced_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
-        kind_ = "";
+        group_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        version_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        kind_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (verbsBuilder_ == null) {
           verbs_ = null;
         } else {
           verbsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000010);
-        shortNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        categories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000040);
+        shortNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        categories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -3926,23 +4155,31 @@ public final class Meta {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.kind_ = kind_;
+        result.group_ = group_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.version_ = version_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.kind_ = kind_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         if (verbsBuilder_ == null) {
           result.verbs_ = verbs_;
         } else {
           result.verbs_ = verbsBuilder_.build();
         }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
           shortNames_ = shortNames_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.shortNames_ = shortNames_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
           categories_ = categories_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000100);
         }
         result.categories_ = categories_;
         result.bitField0_ = to_bitField0_;
@@ -4000,8 +4237,18 @@ public final class Meta {
         if (other.hasNamespaced()) {
           setNamespaced(other.getNamespaced());
         }
-        if (other.hasKind()) {
+        if (other.hasGroup()) {
           bitField0_ |= 0x00000008;
+          group_ = other.group_;
+          onChanged();
+        }
+        if (other.hasVersion()) {
+          bitField0_ |= 0x00000010;
+          version_ = other.version_;
+          onChanged();
+        }
+        if (other.hasKind()) {
+          bitField0_ |= 0x00000020;
           kind_ = other.kind_;
           onChanged();
         }
@@ -4011,7 +4258,7 @@ public final class Meta {
         if (!other.shortNames_.isEmpty()) {
           if (shortNames_.isEmpty()) {
             shortNames_ = other.shortNames_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             ensureShortNamesIsMutable();
             shortNames_.addAll(other.shortNames_);
@@ -4021,7 +4268,7 @@ public final class Meta {
         if (!other.categories_.isEmpty()) {
           if (categories_.isEmpty()) {
             categories_ = other.categories_;
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000100);
           } else {
             ensureCategoriesIsMutable();
             categories_.addAll(other.categories_);
@@ -4316,6 +4563,218 @@ public final class Meta {
         return this;
       }
 
+      private java.lang.Object group_ = "";
+      /**
+       * <pre>
+       * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+       * For subresources, this may have a different value, for example: Scale".
+       * </pre>
+       *
+       * <code>optional string group = 8;</code>
+       */
+      public boolean hasGroup() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+       * For subresources, this may have a different value, for example: Scale".
+       * </pre>
+       *
+       * <code>optional string group = 8;</code>
+       */
+      public java.lang.String getGroup() {
+        java.lang.Object ref = group_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            group_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+       * For subresources, this may have a different value, for example: Scale".
+       * </pre>
+       *
+       * <code>optional string group = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGroupBytes() {
+        java.lang.Object ref = group_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          group_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+       * For subresources, this may have a different value, for example: Scale".
+       * </pre>
+       *
+       * <code>optional string group = 8;</code>
+       */
+      public Builder setGroup(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        group_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+       * For subresources, this may have a different value, for example: Scale".
+       * </pre>
+       *
+       * <code>optional string group = 8;</code>
+       */
+      public Builder clearGroup() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        group_ = getDefaultInstance().getGroup();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * group is the preferred group of the resource.  Empty implies the group of the containing resource list.
+       * For subresources, this may have a different value, for example: Scale".
+       * </pre>
+       *
+       * <code>optional string group = 8;</code>
+       */
+      public Builder setGroupBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        group_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object version_ = "";
+      /**
+       * <pre>
+       * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+       * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+       * </pre>
+       *
+       * <code>optional string version = 9;</code>
+       */
+      public boolean hasVersion() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+       * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+       * </pre>
+       *
+       * <code>optional string version = 9;</code>
+       */
+      public java.lang.String getVersion() {
+        java.lang.Object ref = version_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            version_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+       * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+       * </pre>
+       *
+       * <code>optional string version = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getVersionBytes() {
+        java.lang.Object ref = version_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          version_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+       * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+       * </pre>
+       *
+       * <code>optional string version = 9;</code>
+       */
+      public Builder setVersion(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        version_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+       * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+       * </pre>
+       *
+       * <code>optional string version = 9;</code>
+       */
+      public Builder clearVersion() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        version_ = getDefaultInstance().getVersion();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * version is the preferred version of the resource.  Empty implies the version of the containing resource list
+       * For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
+       * </pre>
+       *
+       * <code>optional string version = 9;</code>
+       */
+      public Builder setVersionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        version_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object kind_ = "";
       /**
        * <pre>
@@ -4325,7 +4784,7 @@ public final class Meta {
        * <code>optional string kind = 3;</code>
        */
       public boolean hasKind() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <pre>
@@ -4380,7 +4839,7 @@ public final class Meta {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000020;
         kind_ = value;
         onChanged();
         return this;
@@ -4393,7 +4852,7 @@ public final class Meta {
        * <code>optional string kind = 3;</code>
        */
       public Builder clearKind() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000020);
         kind_ = getDefaultInstance().getKind();
         onChanged();
         return this;
@@ -4410,7 +4869,7 @@ public final class Meta {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000020;
         kind_ = value;
         onChanged();
         return this;
@@ -4428,7 +4887,7 @@ public final class Meta {
        * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.Verbs verbs = 4;</code>
        */
       public boolean hasVerbs() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <pre>
@@ -4463,7 +4922,7 @@ public final class Meta {
         } else {
           verbsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
@@ -4482,7 +4941,7 @@ public final class Meta {
         } else {
           verbsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
@@ -4495,7 +4954,7 @@ public final class Meta {
        */
       public Builder mergeVerbs(io.kubernetes.client.proto.Meta.Verbs value) {
         if (verbsBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
               verbs_ != null &&
               verbs_ != io.kubernetes.client.proto.Meta.Verbs.getDefaultInstance()) {
             verbs_ =
@@ -4507,7 +4966,7 @@ public final class Meta {
         } else {
           verbsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
@@ -4525,7 +4984,7 @@ public final class Meta {
         } else {
           verbsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
@@ -4537,7 +4996,7 @@ public final class Meta {
        * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.Verbs verbs = 4;</code>
        */
       public io.kubernetes.client.proto.Meta.Verbs.Builder getVerbsBuilder() {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         onChanged();
         return getVerbsFieldBuilder().getBuilder();
       }
@@ -4581,9 +5040,9 @@ public final class Meta {
 
       private com.google.protobuf.LazyStringList shortNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureShortNamesIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           shortNames_ = new com.google.protobuf.LazyStringArrayList(shortNames_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000080;
          }
       }
       /**
@@ -4686,7 +5145,7 @@ public final class Meta {
        */
       public Builder clearShortNames() {
         shortNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -4710,9 +5169,9 @@ public final class Meta {
 
       private com.google.protobuf.LazyStringList categories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureCategoriesIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
           categories_ = new com.google.protobuf.LazyStringArrayList(categories_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000100;
          }
       }
       /**
@@ -4815,7 +5274,7 @@ public final class Meta {
        */
       public Builder clearCategories() {
         categories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000100);
         onChanged();
         return this;
       }
@@ -4866,7 +5325,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new APIResource(input, extensionRegistry);
+        return new APIResource(input, extensionRegistry);
       }
     };
 
@@ -4992,6 +5451,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -5960,7 +6422,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new APIResourceList(input, extensionRegistry);
+        return new APIResourceList(input, extensionRegistry);
       }
     };
 
@@ -6127,6 +6589,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -7266,7 +7731,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new APIVersions(input, extensionRegistry);
+        return new APIVersions(input, extensionRegistry);
       }
     };
 
@@ -7440,6 +7905,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -8518,7 +8986,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DeleteOptions(input, extensionRegistry);
+        return new DeleteOptions(input, extensionRegistry);
       }
     };
 
@@ -8582,6 +9050,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -9008,7 +9479,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Duration(input, extensionRegistry);
+        return new Duration(input, extensionRegistry);
       }
     };
 
@@ -9096,6 +9567,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -9646,7 +10120,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ExportOptions(input, extensionRegistry);
+        return new ExportOptions(input, extensionRegistry);
       }
     };
 
@@ -9754,6 +10228,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -10421,7 +10898,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetOptions(input, extensionRegistry);
+        return new GetOptions(input, extensionRegistry);
       }
     };
 
@@ -10506,6 +10983,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -11155,7 +11635,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GroupKind(input, extensionRegistry);
+        return new GroupKind(input, extensionRegistry);
       }
     };
 
@@ -11240,6 +11720,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -11889,7 +12372,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GroupResource(input, extensionRegistry);
+        return new GroupResource(input, extensionRegistry);
       }
     };
 
@@ -11973,6 +12456,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -12621,7 +13107,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GroupVersion(input, extensionRegistry);
+        return new GroupVersion(input, extensionRegistry);
       }
     };
 
@@ -12731,6 +13217,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -13459,7 +13948,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GroupVersionForDiscovery(input, extensionRegistry);
+        return new GroupVersionForDiscovery(input, extensionRegistry);
       }
     };
 
@@ -13559,6 +14048,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -14358,7 +14850,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GroupVersionKind(input, extensionRegistry);
+        return new GroupVersionKind(input, extensionRegistry);
       }
     };
 
@@ -14458,6 +14950,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -15257,7 +15752,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GroupVersionResource(input, extensionRegistry);
+        return new GroupVersionResource(input, extensionRegistry);
       }
     };
 
@@ -15336,6 +15831,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -15868,7 +16366,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Initializer(input, extensionRegistry);
+        return new Initializer(input, extensionRegistry);
       }
     };
 
@@ -15897,6 +16395,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -15909,6 +16409,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -15920,6 +16422,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -15931,6 +16435,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -15943,6 +16449,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16008,6 +16516,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -16084,6 +16595,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16097,6 +16610,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16111,6 +16626,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16124,6 +16641,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16137,6 +16656,8 @@ public final class Meta {
      * When the last pending initializer is removed, and no failing result is set, the initializers
      * struct will be set to nil and the object is considered as initialized and visible to all
      * clients.
+     * +patchMergeKey=name
+     * +patchStrategy=merge
      * </pre>
      *
      * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16563,6 +17084,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16580,6 +17103,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16597,6 +17122,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16614,6 +17141,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16638,6 +17167,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16659,6 +17190,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16682,6 +17215,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16706,6 +17241,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16727,6 +17264,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16748,6 +17287,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16770,6 +17311,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16790,6 +17333,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16810,6 +17355,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16824,6 +17371,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16841,6 +17390,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16859,6 +17410,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16873,6 +17426,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -16888,6 +17443,8 @@ public final class Meta {
        * When the last pending initializer is removed, and no failing result is set, the initializers
        * struct will be set to nil and the object is considered as initialized and visible to all
        * clients.
+       * +patchMergeKey=name
+       * +patchStrategy=merge
        * </pre>
        *
        * <code>repeated .k8s.io.apimachinery.pkg.apis.meta.v1.Initializer pending = 1;</code>
@@ -17103,7 +17660,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Initializers(input, extensionRegistry);
+        return new Initializers(input, extensionRegistry);
       }
     };
 
@@ -17276,6 +17833,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -18427,7 +18987,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LabelSelector(input, extensionRegistry);
+        return new LabelSelector(input, extensionRegistry);
       }
     };
 
@@ -18485,7 +19045,7 @@ public final class Meta {
     /**
      * <pre>
      * operator represents a key's relationship to a set of values.
-     * Valid operators ard In, NotIn, Exists and DoesNotExist.
+     * Valid operators are In, NotIn, Exists and DoesNotExist.
      * </pre>
      *
      * <code>optional string operator = 2;</code>
@@ -18494,7 +19054,7 @@ public final class Meta {
     /**
      * <pre>
      * operator represents a key's relationship to a set of values.
-     * Valid operators ard In, NotIn, Exists and DoesNotExist.
+     * Valid operators are In, NotIn, Exists and DoesNotExist.
      * </pre>
      *
      * <code>optional string operator = 2;</code>
@@ -18503,7 +19063,7 @@ public final class Meta {
     /**
      * <pre>
      * operator represents a key's relationship to a set of values.
-     * Valid operators ard In, NotIn, Exists and DoesNotExist.
+     * Valid operators are In, NotIn, Exists and DoesNotExist.
      * </pre>
      *
      * <code>optional string operator = 2;</code>
@@ -18595,6 +19155,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -18727,7 +19290,7 @@ public final class Meta {
     /**
      * <pre>
      * operator represents a key's relationship to a set of values.
-     * Valid operators ard In, NotIn, Exists and DoesNotExist.
+     * Valid operators are In, NotIn, Exists and DoesNotExist.
      * </pre>
      *
      * <code>optional string operator = 2;</code>
@@ -18738,7 +19301,7 @@ public final class Meta {
     /**
      * <pre>
      * operator represents a key's relationship to a set of values.
-     * Valid operators ard In, NotIn, Exists and DoesNotExist.
+     * Valid operators are In, NotIn, Exists and DoesNotExist.
      * </pre>
      *
      * <code>optional string operator = 2;</code>
@@ -18760,7 +19323,7 @@ public final class Meta {
     /**
      * <pre>
      * operator represents a key's relationship to a set of values.
-     * Valid operators ard In, NotIn, Exists and DoesNotExist.
+     * Valid operators are In, NotIn, Exists and DoesNotExist.
      * </pre>
      *
      * <code>optional string operator = 2;</code>
@@ -19317,7 +19880,7 @@ public final class Meta {
       /**
        * <pre>
        * operator represents a key's relationship to a set of values.
-       * Valid operators ard In, NotIn, Exists and DoesNotExist.
+       * Valid operators are In, NotIn, Exists and DoesNotExist.
        * </pre>
        *
        * <code>optional string operator = 2;</code>
@@ -19328,7 +19891,7 @@ public final class Meta {
       /**
        * <pre>
        * operator represents a key's relationship to a set of values.
-       * Valid operators ard In, NotIn, Exists and DoesNotExist.
+       * Valid operators are In, NotIn, Exists and DoesNotExist.
        * </pre>
        *
        * <code>optional string operator = 2;</code>
@@ -19350,7 +19913,7 @@ public final class Meta {
       /**
        * <pre>
        * operator represents a key's relationship to a set of values.
-       * Valid operators ard In, NotIn, Exists and DoesNotExist.
+       * Valid operators are In, NotIn, Exists and DoesNotExist.
        * </pre>
        *
        * <code>optional string operator = 2;</code>
@@ -19371,7 +19934,7 @@ public final class Meta {
       /**
        * <pre>
        * operator represents a key's relationship to a set of values.
-       * Valid operators ard In, NotIn, Exists and DoesNotExist.
+       * Valid operators are In, NotIn, Exists and DoesNotExist.
        * </pre>
        *
        * <code>optional string operator = 2;</code>
@@ -19389,7 +19952,7 @@ public final class Meta {
       /**
        * <pre>
        * operator represents a key's relationship to a set of values.
-       * Valid operators ard In, NotIn, Exists and DoesNotExist.
+       * Valid operators are In, NotIn, Exists and DoesNotExist.
        * </pre>
        *
        * <code>optional string operator = 2;</code>
@@ -19403,7 +19966,7 @@ public final class Meta {
       /**
        * <pre>
        * operator represents a key's relationship to a set of values.
-       * Valid operators ard In, NotIn, Exists and DoesNotExist.
+       * Valid operators are In, NotIn, Exists and DoesNotExist.
        * </pre>
        *
        * <code>optional string operator = 2;</code>
@@ -19613,7 +20176,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LabelSelectorRequirement(input, extensionRegistry);
+        return new LabelSelectorRequirement(input, extensionRegistry);
       }
     };
 
@@ -19632,13 +20195,1182 @@ public final class Meta {
 
   }
 
+  public interface ListOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:k8s.io.apimachinery.pkg.apis.meta.v1.List)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Standard list metadata.
+     * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+     * +optional
+     * </pre>
+     *
+     * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+     */
+    boolean hasMetadata();
+    /**
+     * <pre>
+     * Standard list metadata.
+     * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+     * +optional
+     * </pre>
+     *
+     * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+     */
+    io.kubernetes.client.proto.Meta.ListMeta getMetadata();
+    /**
+     * <pre>
+     * Standard list metadata.
+     * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+     * +optional
+     * </pre>
+     *
+     * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+     */
+    io.kubernetes.client.proto.Meta.ListMetaOrBuilder getMetadataOrBuilder();
+
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    java.util.List<io.kubernetes.client.proto.Runtime.RawExtension> 
+        getItemsList();
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    io.kubernetes.client.proto.Runtime.RawExtension getItems(int index);
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    int getItemsCount();
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    java.util.List<? extends io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder> 
+        getItemsOrBuilderList();
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder getItemsOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   * List holds a list of objects, which may not be known by the server.
+   * </pre>
+   *
+   * Protobuf type {@code k8s.io.apimachinery.pkg.apis.meta.v1.List}
+   */
+  public  static final class List extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:k8s.io.apimachinery.pkg.apis.meta.v1.List)
+      ListOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use List.newBuilder() to construct.
+    private List(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private List() {
+      items_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private List(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              io.kubernetes.client.proto.Meta.ListMeta.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(io.kubernetes.client.proto.Meta.ListMeta.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                items_ = new java.util.ArrayList<io.kubernetes.client.proto.Runtime.RawExtension>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              items_.add(
+                  input.readMessage(io.kubernetes.client.proto.Runtime.RawExtension.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          items_ = java.util.Collections.unmodifiableList(items_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return io.kubernetes.client.proto.Meta.internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.kubernetes.client.proto.Meta.internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.kubernetes.client.proto.Meta.List.class, io.kubernetes.client.proto.Meta.List.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int METADATA_FIELD_NUMBER = 1;
+    private io.kubernetes.client.proto.Meta.ListMeta metadata_;
+    /**
+     * <pre>
+     * Standard list metadata.
+     * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+     * +optional
+     * </pre>
+     *
+     * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+     */
+    public boolean hasMetadata() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     * Standard list metadata.
+     * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+     * +optional
+     * </pre>
+     *
+     * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+     */
+    public io.kubernetes.client.proto.Meta.ListMeta getMetadata() {
+      return metadata_ == null ? io.kubernetes.client.proto.Meta.ListMeta.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <pre>
+     * Standard list metadata.
+     * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+     * +optional
+     * </pre>
+     *
+     * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+     */
+    public io.kubernetes.client.proto.Meta.ListMetaOrBuilder getMetadataOrBuilder() {
+      return metadata_ == null ? io.kubernetes.client.proto.Meta.ListMeta.getDefaultInstance() : metadata_;
+    }
+
+    public static final int ITEMS_FIELD_NUMBER = 2;
+    private java.util.List<io.kubernetes.client.proto.Runtime.RawExtension> items_;
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    public java.util.List<io.kubernetes.client.proto.Runtime.RawExtension> getItemsList() {
+      return items_;
+    }
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    public java.util.List<? extends io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder> 
+        getItemsOrBuilderList() {
+      return items_;
+    }
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    public int getItemsCount() {
+      return items_.size();
+    }
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    public io.kubernetes.client.proto.Runtime.RawExtension getItems(int index) {
+      return items_.get(index);
+    }
+    /**
+     * <pre>
+     * List of objects
+     * </pre>
+     *
+     * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+     */
+    public io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder getItemsOrBuilder(
+        int index) {
+      return items_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, getMetadata());
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        output.writeMessage(2, items_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getMetadata());
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, items_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof io.kubernetes.client.proto.Meta.List)) {
+        return super.equals(obj);
+      }
+      io.kubernetes.client.proto.Meta.List other = (io.kubernetes.client.proto.Meta.List) obj;
+
+      boolean result = true;
+      result = result && (hasMetadata() == other.hasMetadata());
+      if (hasMetadata()) {
+        result = result && getMetadata()
+            .equals(other.getMetadata());
+      }
+      result = result && getItemsList()
+          .equals(other.getItemsList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
+      }
+      if (getItemsCount() > 0) {
+        hash = (37 * hash) + ITEMS_FIELD_NUMBER;
+        hash = (53 * hash) + getItemsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static io.kubernetes.client.proto.Meta.List parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(io.kubernetes.client.proto.Meta.List prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * List holds a list of objects, which may not be known by the server.
+     * </pre>
+     *
+     * Protobuf type {@code k8s.io.apimachinery.pkg.apis.meta.v1.List}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:k8s.io.apimachinery.pkg.apis.meta.v1.List)
+        io.kubernetes.client.proto.Meta.ListOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return io.kubernetes.client.proto.Meta.internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return io.kubernetes.client.proto.Meta.internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                io.kubernetes.client.proto.Meta.List.class, io.kubernetes.client.proto.Meta.List.Builder.class);
+      }
+
+      // Construct using io.kubernetes.client.proto.Meta.List.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getMetadataFieldBuilder();
+          getItemsFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadataBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          itemsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return io.kubernetes.client.proto.Meta.internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_descriptor;
+      }
+
+      public io.kubernetes.client.proto.Meta.List getDefaultInstanceForType() {
+        return io.kubernetes.client.proto.Meta.List.getDefaultInstance();
+      }
+
+      public io.kubernetes.client.proto.Meta.List build() {
+        io.kubernetes.client.proto.Meta.List result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public io.kubernetes.client.proto.Meta.List buildPartial() {
+        io.kubernetes.client.proto.Meta.List result = new io.kubernetes.client.proto.Meta.List(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
+        }
+        if (itemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            items_ = java.util.Collections.unmodifiableList(items_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.items_ = items_;
+        } else {
+          result.items_ = itemsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof io.kubernetes.client.proto.Meta.List) {
+          return mergeFrom((io.kubernetes.client.proto.Meta.List)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(io.kubernetes.client.proto.Meta.List other) {
+        if (other == io.kubernetes.client.proto.Meta.List.getDefaultInstance()) return this;
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
+        }
+        if (itemsBuilder_ == null) {
+          if (!other.items_.isEmpty()) {
+            if (items_.isEmpty()) {
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureItemsIsMutable();
+              items_.addAll(other.items_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.items_.isEmpty()) {
+            if (itemsBuilder_.isEmpty()) {
+              itemsBuilder_.dispose();
+              itemsBuilder_ = null;
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              itemsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getItemsFieldBuilder() : null;
+            } else {
+              itemsBuilder_.addAllMessages(other.items_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        io.kubernetes.client.proto.Meta.List parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (io.kubernetes.client.proto.Meta.List) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private io.kubernetes.client.proto.Meta.ListMeta metadata_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          io.kubernetes.client.proto.Meta.ListMeta, io.kubernetes.client.proto.Meta.ListMeta.Builder, io.kubernetes.client.proto.Meta.ListMetaOrBuilder> metadataBuilder_;
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public boolean hasMetadata() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public io.kubernetes.client.proto.Meta.ListMeta getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? io.kubernetes.client.proto.Meta.ListMeta.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public Builder setMetadata(io.kubernetes.client.proto.Meta.ListMeta value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public Builder setMetadata(
+          io.kubernetes.client.proto.Meta.ListMeta.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public Builder mergeMetadata(io.kubernetes.client.proto.Meta.ListMeta value) {
+        if (metadataBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              metadata_ != null &&
+              metadata_ != io.kubernetes.client.proto.Meta.ListMeta.getDefaultInstance()) {
+            metadata_ =
+              io.kubernetes.client.proto.Meta.ListMeta.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadataBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public io.kubernetes.client.proto.Meta.ListMeta.Builder getMetadataBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      public io.kubernetes.client.proto.Meta.ListMetaOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              io.kubernetes.client.proto.Meta.ListMeta.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <pre>
+       * Standard list metadata.
+       * More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+       * +optional
+       * </pre>
+       *
+       * <code>optional .k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta metadata = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          io.kubernetes.client.proto.Meta.ListMeta, io.kubernetes.client.proto.Meta.ListMeta.Builder, io.kubernetes.client.proto.Meta.ListMetaOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              io.kubernetes.client.proto.Meta.ListMeta, io.kubernetes.client.proto.Meta.ListMeta.Builder, io.kubernetes.client.proto.Meta.ListMetaOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
+      }
+
+      private java.util.List<io.kubernetes.client.proto.Runtime.RawExtension> items_ =
+        java.util.Collections.emptyList();
+      private void ensureItemsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          items_ = new java.util.ArrayList<io.kubernetes.client.proto.Runtime.RawExtension>(items_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          io.kubernetes.client.proto.Runtime.RawExtension, io.kubernetes.client.proto.Runtime.RawExtension.Builder, io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder> itemsBuilder_;
+
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public java.util.List<io.kubernetes.client.proto.Runtime.RawExtension> getItemsList() {
+        if (itemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(items_);
+        } else {
+          return itemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public int getItemsCount() {
+        if (itemsBuilder_ == null) {
+          return items_.size();
+        } else {
+          return itemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public io.kubernetes.client.proto.Runtime.RawExtension getItems(int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);
+        } else {
+          return itemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder setItems(
+          int index, io.kubernetes.client.proto.Runtime.RawExtension value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.set(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder setItems(
+          int index, io.kubernetes.client.proto.Runtime.RawExtension.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder addItems(io.kubernetes.client.proto.Runtime.RawExtension value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder addItems(
+          int index, io.kubernetes.client.proto.Runtime.RawExtension value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder addItems(
+          io.kubernetes.client.proto.Runtime.RawExtension.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder addItems(
+          int index, io.kubernetes.client.proto.Runtime.RawExtension.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder addAllItems(
+          java.lang.Iterable<? extends io.kubernetes.client.proto.Runtime.RawExtension> values) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, items_);
+          onChanged();
+        } else {
+          itemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder clearItems() {
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          itemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public Builder removeItems(int index) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.remove(index);
+          onChanged();
+        } else {
+          itemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public io.kubernetes.client.proto.Runtime.RawExtension.Builder getItemsBuilder(
+          int index) {
+        return getItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder getItemsOrBuilder(
+          int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);  } else {
+          return itemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public java.util.List<? extends io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder> 
+           getItemsOrBuilderList() {
+        if (itemsBuilder_ != null) {
+          return itemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(items_);
+        }
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public io.kubernetes.client.proto.Runtime.RawExtension.Builder addItemsBuilder() {
+        return getItemsFieldBuilder().addBuilder(
+            io.kubernetes.client.proto.Runtime.RawExtension.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public io.kubernetes.client.proto.Runtime.RawExtension.Builder addItemsBuilder(
+          int index) {
+        return getItemsFieldBuilder().addBuilder(
+            index, io.kubernetes.client.proto.Runtime.RawExtension.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * List of objects
+       * </pre>
+       *
+       * <code>repeated .k8s.io.apimachinery.pkg.runtime.RawExtension items = 2;</code>
+       */
+      public java.util.List<io.kubernetes.client.proto.Runtime.RawExtension.Builder> 
+           getItemsBuilderList() {
+        return getItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          io.kubernetes.client.proto.Runtime.RawExtension, io.kubernetes.client.proto.Runtime.RawExtension.Builder, io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder> 
+          getItemsFieldBuilder() {
+        if (itemsBuilder_ == null) {
+          itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              io.kubernetes.client.proto.Runtime.RawExtension, io.kubernetes.client.proto.Runtime.RawExtension.Builder, io.kubernetes.client.proto.Runtime.RawExtensionOrBuilder>(
+                  items_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          items_ = null;
+        }
+        return itemsBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:k8s.io.apimachinery.pkg.apis.meta.v1.List)
+    }
+
+    // @@protoc_insertion_point(class_scope:k8s.io.apimachinery.pkg.apis.meta.v1.List)
+    private static final io.kubernetes.client.proto.Meta.List DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new io.kubernetes.client.proto.Meta.List();
+    }
+
+    public static io.kubernetes.client.proto.Meta.List getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<List>
+        PARSER = new com.google.protobuf.AbstractParser<List>() {
+      public List parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new List(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<List> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<List> getParserForType() {
+      return PARSER;
+    }
+
+    public io.kubernetes.client.proto.Meta.List getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ListMetaOrBuilder extends
       // @@protoc_insertion_point(interface_extends:k8s.io.apimachinery.pkg.apis.meta.v1.ListMeta)
       com.google.protobuf.MessageOrBuilder {
 
     /**
      * <pre>
-     * SelfLink is a URL representing this object.
+     * selfLink is a URL representing this object.
      * Populated by the system.
      * Read-only.
      * +optional
@@ -19649,7 +21381,7 @@ public final class Meta {
     boolean hasSelfLink();
     /**
      * <pre>
-     * SelfLink is a URL representing this object.
+     * selfLink is a URL representing this object.
      * Populated by the system.
      * Read-only.
      * +optional
@@ -19660,7 +21392,7 @@ public final class Meta {
     java.lang.String getSelfLink();
     /**
      * <pre>
-     * SelfLink is a URL representing this object.
+     * selfLink is a URL representing this object.
      * Populated by the system.
      * Read-only.
      * +optional
@@ -19714,6 +21446,47 @@ public final class Meta {
      */
     com.google.protobuf.ByteString
         getResourceVersionBytes();
+
+    /**
+     * <pre>
+     * continue may be set if the user set a limit on the number of items returned, and indicates that
+     * the server has more data available. The value is opaque and may be used to issue another request
+     * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+     * list may not be possible if the server configuration has changed or more than a few minutes have
+     * passed. The resourceVersion field returned when using this continue value will be identical to
+     * the value in the first response.
+     * </pre>
+     *
+     * <code>optional string continue = 3;</code>
+     */
+    boolean hasContinue();
+    /**
+     * <pre>
+     * continue may be set if the user set a limit on the number of items returned, and indicates that
+     * the server has more data available. The value is opaque and may be used to issue another request
+     * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+     * list may not be possible if the server configuration has changed or more than a few minutes have
+     * passed. The resourceVersion field returned when using this continue value will be identical to
+     * the value in the first response.
+     * </pre>
+     *
+     * <code>optional string continue = 3;</code>
+     */
+    java.lang.String getContinue();
+    /**
+     * <pre>
+     * continue may be set if the user set a limit on the number of items returned, and indicates that
+     * the server has more data available. The value is opaque and may be used to issue another request
+     * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+     * list may not be possible if the server configuration has changed or more than a few minutes have
+     * passed. The resourceVersion field returned when using this continue value will be identical to
+     * the value in the first response.
+     * </pre>
+     *
+     * <code>optional string continue = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getContinueBytes();
   }
   /**
    * <pre>
@@ -19735,6 +21508,7 @@ public final class Meta {
     private ListMeta() {
       selfLink_ = "";
       resourceVersion_ = "";
+      continue_ = "";
     }
 
     @java.lang.Override
@@ -19747,6 +21521,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -19775,6 +21552,12 @@ public final class Meta {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
               resourceVersion_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              continue_ = bs;
               break;
             }
           }
@@ -19806,7 +21589,7 @@ public final class Meta {
     private volatile java.lang.Object selfLink_;
     /**
      * <pre>
-     * SelfLink is a URL representing this object.
+     * selfLink is a URL representing this object.
      * Populated by the system.
      * Read-only.
      * +optional
@@ -19819,7 +21602,7 @@ public final class Meta {
     }
     /**
      * <pre>
-     * SelfLink is a URL representing this object.
+     * selfLink is a URL representing this object.
      * Populated by the system.
      * Read-only.
      * +optional
@@ -19843,7 +21626,7 @@ public final class Meta {
     }
     /**
      * <pre>
-     * SelfLink is a URL representing this object.
+     * selfLink is a URL representing this object.
      * Populated by the system.
      * Read-only.
      * +optional
@@ -19937,6 +21720,75 @@ public final class Meta {
       }
     }
 
+    public static final int CONTINUE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object continue_;
+    /**
+     * <pre>
+     * continue may be set if the user set a limit on the number of items returned, and indicates that
+     * the server has more data available. The value is opaque and may be used to issue another request
+     * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+     * list may not be possible if the server configuration has changed or more than a few minutes have
+     * passed. The resourceVersion field returned when using this continue value will be identical to
+     * the value in the first response.
+     * </pre>
+     *
+     * <code>optional string continue = 3;</code>
+     */
+    public boolean hasContinue() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     * continue may be set if the user set a limit on the number of items returned, and indicates that
+     * the server has more data available. The value is opaque and may be used to issue another request
+     * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+     * list may not be possible if the server configuration has changed or more than a few minutes have
+     * passed. The resourceVersion field returned when using this continue value will be identical to
+     * the value in the first response.
+     * </pre>
+     *
+     * <code>optional string continue = 3;</code>
+     */
+    public java.lang.String getContinue() {
+      java.lang.Object ref = continue_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          continue_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * continue may be set if the user set a limit on the number of items returned, and indicates that
+     * the server has more data available. The value is opaque and may be used to issue another request
+     * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+     * list may not be possible if the server configuration has changed or more than a few minutes have
+     * passed. The resourceVersion field returned when using this continue value will be identical to
+     * the value in the first response.
+     * </pre>
+     *
+     * <code>optional string continue = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContinueBytes() {
+      java.lang.Object ref = continue_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        continue_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -19955,6 +21807,9 @@ public final class Meta {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, resourceVersion_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, continue_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -19968,6 +21823,9 @@ public final class Meta {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, resourceVersion_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, continue_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -19995,6 +21853,11 @@ public final class Meta {
         result = result && getResourceVersion()
             .equals(other.getResourceVersion());
       }
+      result = result && (hasContinue() == other.hasContinue());
+      if (hasContinue()) {
+        result = result && getContinue()
+            .equals(other.getContinue());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -20013,6 +21876,10 @@ public final class Meta {
       if (hasResourceVersion()) {
         hash = (37 * hash) + RESOURCEVERSION_FIELD_NUMBER;
         hash = (53 * hash) + getResourceVersion().hashCode();
+      }
+      if (hasContinue()) {
+        hash = (37 * hash) + CONTINUE_FIELD_NUMBER;
+        hash = (53 * hash) + getContinue().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -20152,6 +22019,8 @@ public final class Meta {
         bitField0_ = (bitField0_ & ~0x00000001);
         resourceVersion_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        continue_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -20184,6 +22053,10 @@ public final class Meta {
           to_bitField0_ |= 0x00000002;
         }
         result.resourceVersion_ = resourceVersion_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.continue_ = continue_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -20236,6 +22109,11 @@ public final class Meta {
           resourceVersion_ = other.resourceVersion_;
           onChanged();
         }
+        if (other.hasContinue()) {
+          bitField0_ |= 0x00000004;
+          continue_ = other.continue_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -20267,7 +22145,7 @@ public final class Meta {
       private java.lang.Object selfLink_ = "";
       /**
        * <pre>
-       * SelfLink is a URL representing this object.
+       * selfLink is a URL representing this object.
        * Populated by the system.
        * Read-only.
        * +optional
@@ -20280,7 +22158,7 @@ public final class Meta {
       }
       /**
        * <pre>
-       * SelfLink is a URL representing this object.
+       * selfLink is a URL representing this object.
        * Populated by the system.
        * Read-only.
        * +optional
@@ -20304,7 +22182,7 @@ public final class Meta {
       }
       /**
        * <pre>
-       * SelfLink is a URL representing this object.
+       * selfLink is a URL representing this object.
        * Populated by the system.
        * Read-only.
        * +optional
@@ -20327,7 +22205,7 @@ public final class Meta {
       }
       /**
        * <pre>
-       * SelfLink is a URL representing this object.
+       * selfLink is a URL representing this object.
        * Populated by the system.
        * Read-only.
        * +optional
@@ -20347,7 +22225,7 @@ public final class Meta {
       }
       /**
        * <pre>
-       * SelfLink is a URL representing this object.
+       * selfLink is a URL representing this object.
        * Populated by the system.
        * Read-only.
        * +optional
@@ -20363,7 +22241,7 @@ public final class Meta {
       }
       /**
        * <pre>
-       * SelfLink is a URL representing this object.
+       * selfLink is a URL representing this object.
        * Populated by the system.
        * Read-only.
        * +optional
@@ -20517,6 +22395,136 @@ public final class Meta {
         onChanged();
         return this;
       }
+
+      private java.lang.Object continue_ = "";
+      /**
+       * <pre>
+       * continue may be set if the user set a limit on the number of items returned, and indicates that
+       * the server has more data available. The value is opaque and may be used to issue another request
+       * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+       * list may not be possible if the server configuration has changed or more than a few minutes have
+       * passed. The resourceVersion field returned when using this continue value will be identical to
+       * the value in the first response.
+       * </pre>
+       *
+       * <code>optional string continue = 3;</code>
+       */
+      public boolean hasContinue() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       * continue may be set if the user set a limit on the number of items returned, and indicates that
+       * the server has more data available. The value is opaque and may be used to issue another request
+       * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+       * list may not be possible if the server configuration has changed or more than a few minutes have
+       * passed. The resourceVersion field returned when using this continue value will be identical to
+       * the value in the first response.
+       * </pre>
+       *
+       * <code>optional string continue = 3;</code>
+       */
+      public java.lang.String getContinue() {
+        java.lang.Object ref = continue_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            continue_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * continue may be set if the user set a limit on the number of items returned, and indicates that
+       * the server has more data available. The value is opaque and may be used to issue another request
+       * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+       * list may not be possible if the server configuration has changed or more than a few minutes have
+       * passed. The resourceVersion field returned when using this continue value will be identical to
+       * the value in the first response.
+       * </pre>
+       *
+       * <code>optional string continue = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContinueBytes() {
+        java.lang.Object ref = continue_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          continue_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * continue may be set if the user set a limit on the number of items returned, and indicates that
+       * the server has more data available. The value is opaque and may be used to issue another request
+       * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+       * list may not be possible if the server configuration has changed or more than a few minutes have
+       * passed. The resourceVersion field returned when using this continue value will be identical to
+       * the value in the first response.
+       * </pre>
+       *
+       * <code>optional string continue = 3;</code>
+       */
+      public Builder setContinue(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        continue_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * continue may be set if the user set a limit on the number of items returned, and indicates that
+       * the server has more data available. The value is opaque and may be used to issue another request
+       * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+       * list may not be possible if the server configuration has changed or more than a few minutes have
+       * passed. The resourceVersion field returned when using this continue value will be identical to
+       * the value in the first response.
+       * </pre>
+       *
+       * <code>optional string continue = 3;</code>
+       */
+      public Builder clearContinue() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        continue_ = getDefaultInstance().getContinue();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * continue may be set if the user set a limit on the number of items returned, and indicates that
+       * the server has more data available. The value is opaque and may be used to issue another request
+       * to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+       * list may not be possible if the server configuration has changed or more than a few minutes have
+       * passed. The resourceVersion field returned when using this continue value will be identical to
+       * the value in the first response.
+       * </pre>
+       *
+       * <code>optional string continue = 3;</code>
+       */
+      public Builder setContinueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        continue_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -20547,7 +22555,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ListMeta(input, extensionRegistry);
+        return new ListMeta(input, extensionRegistry);
       }
     };
 
@@ -20736,6 +22744,100 @@ public final class Meta {
      * <code>optional int64 timeoutSeconds = 5;</code>
      */
     long getTimeoutSeconds();
+
+    /**
+     * <pre>
+     * limit is a maximum number of responses to return for a list call. If more items exist, the
+     * server will set the `continue` field on the list metadata to a value that can be used with the
+     * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+     * the requested amount of items (up to zero items) in the event all requested objects are
+     * filtered out and clients should only use the presence of the continue field to determine whether
+     * more results are available. Servers may choose not to support the limit argument and will return
+     * all of the available results. If limit is specified and the continue field is empty, clients may
+     * assume that no more results are available. This field is not supported if watch is true.
+     * 
+     * The server guarantees that the objects returned when using continue will be identical to issuing
+     * a single list call without a limit - that is, no objects created, modified, or deleted after the
+     * first request is issued will be included in any subsequent continued requests. This is sometimes
+     * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+     * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+     * updated during a chunked list the version of the object that was present at the time the first list
+     * result was calculated is returned.
+     * </pre>
+     *
+     * <code>optional int64 limit = 7;</code>
+     */
+    boolean hasLimit();
+    /**
+     * <pre>
+     * limit is a maximum number of responses to return for a list call. If more items exist, the
+     * server will set the `continue` field on the list metadata to a value that can be used with the
+     * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+     * the requested amount of items (up to zero items) in the event all requested objects are
+     * filtered out and clients should only use the presence of the continue field to determine whether
+     * more results are available. Servers may choose not to support the limit argument and will return
+     * all of the available results. If limit is specified and the continue field is empty, clients may
+     * assume that no more results are available. This field is not supported if watch is true.
+     * 
+     * The server guarantees that the objects returned when using continue will be identical to issuing
+     * a single list call without a limit - that is, no objects created, modified, or deleted after the
+     * first request is issued will be included in any subsequent continued requests. This is sometimes
+     * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+     * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+     * updated during a chunked list the version of the object that was present at the time the first list
+     * result was calculated is returned.
+     * </pre>
+     *
+     * <code>optional int64 limit = 7;</code>
+     */
+    long getLimit();
+
+    /**
+     * <pre>
+     * The continue option should be set when retrieving more results from the server. Since this value
+     * is server defined, clients may only use the continue value from a previous query result with
+     * identical query parameters (except for the value of continue) and the server may reject a continue
+     * value it does not recognize. If the specified continue value is no longer valid whether due to
+     * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+     * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+     * the continue field. This field is not supported when watch is true. Clients may start a watch from
+     * the last resourceVersion value returned by the server and not miss any modifications.
+     * </pre>
+     *
+     * <code>optional string continue = 8;</code>
+     */
+    boolean hasContinue();
+    /**
+     * <pre>
+     * The continue option should be set when retrieving more results from the server. Since this value
+     * is server defined, clients may only use the continue value from a previous query result with
+     * identical query parameters (except for the value of continue) and the server may reject a continue
+     * value it does not recognize. If the specified continue value is no longer valid whether due to
+     * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+     * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+     * the continue field. This field is not supported when watch is true. Clients may start a watch from
+     * the last resourceVersion value returned by the server and not miss any modifications.
+     * </pre>
+     *
+     * <code>optional string continue = 8;</code>
+     */
+    java.lang.String getContinue();
+    /**
+     * <pre>
+     * The continue option should be set when retrieving more results from the server. Since this value
+     * is server defined, clients may only use the continue value from a previous query result with
+     * identical query parameters (except for the value of continue) and the server may reject a continue
+     * value it does not recognize. If the specified continue value is no longer valid whether due to
+     * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+     * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+     * the continue field. This field is not supported when watch is true. Clients may start a watch from
+     * the last resourceVersion value returned by the server and not miss any modifications.
+     * </pre>
+     *
+     * <code>optional string continue = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getContinueBytes();
   }
   /**
    * <pre>
@@ -20760,6 +22862,8 @@ public final class Meta {
       watch_ = false;
       resourceVersion_ = "";
       timeoutSeconds_ = 0L;
+      limit_ = 0L;
+      continue_ = "";
     }
 
     @java.lang.Override
@@ -20772,6 +22876,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -20821,6 +22928,17 @@ public final class Meta {
             case 48: {
               bitField0_ |= 0x00000004;
               includeUninitialized_ = input.readBool();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              limit_ = input.readInt64();
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              continue_ = bs;
               break;
             }
           }
@@ -21117,6 +23235,134 @@ public final class Meta {
       return timeoutSeconds_;
     }
 
+    public static final int LIMIT_FIELD_NUMBER = 7;
+    private long limit_;
+    /**
+     * <pre>
+     * limit is a maximum number of responses to return for a list call. If more items exist, the
+     * server will set the `continue` field on the list metadata to a value that can be used with the
+     * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+     * the requested amount of items (up to zero items) in the event all requested objects are
+     * filtered out and clients should only use the presence of the continue field to determine whether
+     * more results are available. Servers may choose not to support the limit argument and will return
+     * all of the available results. If limit is specified and the continue field is empty, clients may
+     * assume that no more results are available. This field is not supported if watch is true.
+     * 
+     * The server guarantees that the objects returned when using continue will be identical to issuing
+     * a single list call without a limit - that is, no objects created, modified, or deleted after the
+     * first request is issued will be included in any subsequent continued requests. This is sometimes
+     * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+     * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+     * updated during a chunked list the version of the object that was present at the time the first list
+     * result was calculated is returned.
+     * </pre>
+     *
+     * <code>optional int64 limit = 7;</code>
+     */
+    public boolean hasLimit() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <pre>
+     * limit is a maximum number of responses to return for a list call. If more items exist, the
+     * server will set the `continue` field on the list metadata to a value that can be used with the
+     * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+     * the requested amount of items (up to zero items) in the event all requested objects are
+     * filtered out and clients should only use the presence of the continue field to determine whether
+     * more results are available. Servers may choose not to support the limit argument and will return
+     * all of the available results. If limit is specified and the continue field is empty, clients may
+     * assume that no more results are available. This field is not supported if watch is true.
+     * 
+     * The server guarantees that the objects returned when using continue will be identical to issuing
+     * a single list call without a limit - that is, no objects created, modified, or deleted after the
+     * first request is issued will be included in any subsequent continued requests. This is sometimes
+     * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+     * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+     * updated during a chunked list the version of the object that was present at the time the first list
+     * result was calculated is returned.
+     * </pre>
+     *
+     * <code>optional int64 limit = 7;</code>
+     */
+    public long getLimit() {
+      return limit_;
+    }
+
+    public static final int CONTINUE_FIELD_NUMBER = 8;
+    private volatile java.lang.Object continue_;
+    /**
+     * <pre>
+     * The continue option should be set when retrieving more results from the server. Since this value
+     * is server defined, clients may only use the continue value from a previous query result with
+     * identical query parameters (except for the value of continue) and the server may reject a continue
+     * value it does not recognize. If the specified continue value is no longer valid whether due to
+     * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+     * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+     * the continue field. This field is not supported when watch is true. Clients may start a watch from
+     * the last resourceVersion value returned by the server and not miss any modifications.
+     * </pre>
+     *
+     * <code>optional string continue = 8;</code>
+     */
+    public boolean hasContinue() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <pre>
+     * The continue option should be set when retrieving more results from the server. Since this value
+     * is server defined, clients may only use the continue value from a previous query result with
+     * identical query parameters (except for the value of continue) and the server may reject a continue
+     * value it does not recognize. If the specified continue value is no longer valid whether due to
+     * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+     * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+     * the continue field. This field is not supported when watch is true. Clients may start a watch from
+     * the last resourceVersion value returned by the server and not miss any modifications.
+     * </pre>
+     *
+     * <code>optional string continue = 8;</code>
+     */
+    public java.lang.String getContinue() {
+      java.lang.Object ref = continue_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          continue_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * The continue option should be set when retrieving more results from the server. Since this value
+     * is server defined, clients may only use the continue value from a previous query result with
+     * identical query parameters (except for the value of continue) and the server may reject a continue
+     * value it does not recognize. If the specified continue value is no longer valid whether due to
+     * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+     * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+     * the continue field. This field is not supported when watch is true. Clients may start a watch from
+     * the last resourceVersion value returned by the server and not miss any modifications.
+     * </pre>
+     *
+     * <code>optional string continue = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContinueBytes() {
+      java.lang.Object ref = continue_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        continue_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -21147,6 +23393,12 @@ public final class Meta {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(6, includeUninitialized_);
       }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt64(7, limit_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, continue_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -21175,6 +23427,13 @@ public final class Meta {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(6, includeUninitialized_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, limit_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, continue_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -21222,6 +23481,16 @@ public final class Meta {
         result = result && (getTimeoutSeconds()
             == other.getTimeoutSeconds());
       }
+      result = result && (hasLimit() == other.hasLimit());
+      if (hasLimit()) {
+        result = result && (getLimit()
+            == other.getLimit());
+      }
+      result = result && (hasContinue() == other.hasContinue());
+      if (hasContinue()) {
+        result = result && getContinue()
+            .equals(other.getContinue());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -21259,6 +23528,15 @@ public final class Meta {
         hash = (37 * hash) + TIMEOUTSECONDS_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getTimeoutSeconds());
+      }
+      if (hasLimit()) {
+        hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getLimit());
+      }
+      if (hasContinue()) {
+        hash = (37 * hash) + CONTINUE_FIELD_NUMBER;
+        hash = (53 * hash) + getContinue().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -21405,6 +23683,10 @@ public final class Meta {
         bitField0_ = (bitField0_ & ~0x00000010);
         timeoutSeconds_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
+        limit_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        continue_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -21453,6 +23735,14 @@ public final class Meta {
           to_bitField0_ |= 0x00000020;
         }
         result.timeoutSeconds_ = timeoutSeconds_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.limit_ = limit_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.continue_ = continue_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -21518,6 +23808,14 @@ public final class Meta {
         }
         if (other.hasTimeoutSeconds()) {
           setTimeoutSeconds(other.getTimeoutSeconds());
+        }
+        if (other.hasLimit()) {
+          setLimit(other.getLimit());
+        }
+        if (other.hasContinue()) {
+          bitField0_ |= 0x00000080;
+          continue_ = other.continue_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -22066,6 +24364,256 @@ public final class Meta {
         onChanged();
         return this;
       }
+
+      private long limit_ ;
+      /**
+       * <pre>
+       * limit is a maximum number of responses to return for a list call. If more items exist, the
+       * server will set the `continue` field on the list metadata to a value that can be used with the
+       * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+       * the requested amount of items (up to zero items) in the event all requested objects are
+       * filtered out and clients should only use the presence of the continue field to determine whether
+       * more results are available. Servers may choose not to support the limit argument and will return
+       * all of the available results. If limit is specified and the continue field is empty, clients may
+       * assume that no more results are available. This field is not supported if watch is true.
+       * 
+       * The server guarantees that the objects returned when using continue will be identical to issuing
+       * a single list call without a limit - that is, no objects created, modified, or deleted after the
+       * first request is issued will be included in any subsequent continued requests. This is sometimes
+       * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+       * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+       * updated during a chunked list the version of the object that was present at the time the first list
+       * result was calculated is returned.
+       * </pre>
+       *
+       * <code>optional int64 limit = 7;</code>
+       */
+      public boolean hasLimit() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <pre>
+       * limit is a maximum number of responses to return for a list call. If more items exist, the
+       * server will set the `continue` field on the list metadata to a value that can be used with the
+       * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+       * the requested amount of items (up to zero items) in the event all requested objects are
+       * filtered out and clients should only use the presence of the continue field to determine whether
+       * more results are available. Servers may choose not to support the limit argument and will return
+       * all of the available results. If limit is specified and the continue field is empty, clients may
+       * assume that no more results are available. This field is not supported if watch is true.
+       * 
+       * The server guarantees that the objects returned when using continue will be identical to issuing
+       * a single list call without a limit - that is, no objects created, modified, or deleted after the
+       * first request is issued will be included in any subsequent continued requests. This is sometimes
+       * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+       * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+       * updated during a chunked list the version of the object that was present at the time the first list
+       * result was calculated is returned.
+       * </pre>
+       *
+       * <code>optional int64 limit = 7;</code>
+       */
+      public long getLimit() {
+        return limit_;
+      }
+      /**
+       * <pre>
+       * limit is a maximum number of responses to return for a list call. If more items exist, the
+       * server will set the `continue` field on the list metadata to a value that can be used with the
+       * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+       * the requested amount of items (up to zero items) in the event all requested objects are
+       * filtered out and clients should only use the presence of the continue field to determine whether
+       * more results are available. Servers may choose not to support the limit argument and will return
+       * all of the available results. If limit is specified and the continue field is empty, clients may
+       * assume that no more results are available. This field is not supported if watch is true.
+       * 
+       * The server guarantees that the objects returned when using continue will be identical to issuing
+       * a single list call without a limit - that is, no objects created, modified, or deleted after the
+       * first request is issued will be included in any subsequent continued requests. This is sometimes
+       * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+       * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+       * updated during a chunked list the version of the object that was present at the time the first list
+       * result was calculated is returned.
+       * </pre>
+       *
+       * <code>optional int64 limit = 7;</code>
+       */
+      public Builder setLimit(long value) {
+        bitField0_ |= 0x00000040;
+        limit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * limit is a maximum number of responses to return for a list call. If more items exist, the
+       * server will set the `continue` field on the list metadata to a value that can be used with the
+       * same initial query to retrieve the next set of results. Setting a limit may return fewer than
+       * the requested amount of items (up to zero items) in the event all requested objects are
+       * filtered out and clients should only use the presence of the continue field to determine whether
+       * more results are available. Servers may choose not to support the limit argument and will return
+       * all of the available results. If limit is specified and the continue field is empty, clients may
+       * assume that no more results are available. This field is not supported if watch is true.
+       * 
+       * The server guarantees that the objects returned when using continue will be identical to issuing
+       * a single list call without a limit - that is, no objects created, modified, or deleted after the
+       * first request is issued will be included in any subsequent continued requests. This is sometimes
+       * referred to as a consistent snapshot, and ensures that a client that is using limit to receive
+       * smaller chunks of a very large result can ensure they see all possible objects. If objects are
+       * updated during a chunked list the version of the object that was present at the time the first list
+       * result was calculated is returned.
+       * </pre>
+       *
+       * <code>optional int64 limit = 7;</code>
+       */
+      public Builder clearLimit() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        limit_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object continue_ = "";
+      /**
+       * <pre>
+       * The continue option should be set when retrieving more results from the server. Since this value
+       * is server defined, clients may only use the continue value from a previous query result with
+       * identical query parameters (except for the value of continue) and the server may reject a continue
+       * value it does not recognize. If the specified continue value is no longer valid whether due to
+       * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+       * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+       * the continue field. This field is not supported when watch is true. Clients may start a watch from
+       * the last resourceVersion value returned by the server and not miss any modifications.
+       * </pre>
+       *
+       * <code>optional string continue = 8;</code>
+       */
+      public boolean hasContinue() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <pre>
+       * The continue option should be set when retrieving more results from the server. Since this value
+       * is server defined, clients may only use the continue value from a previous query result with
+       * identical query parameters (except for the value of continue) and the server may reject a continue
+       * value it does not recognize. If the specified continue value is no longer valid whether due to
+       * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+       * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+       * the continue field. This field is not supported when watch is true. Clients may start a watch from
+       * the last resourceVersion value returned by the server and not miss any modifications.
+       * </pre>
+       *
+       * <code>optional string continue = 8;</code>
+       */
+      public java.lang.String getContinue() {
+        java.lang.Object ref = continue_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            continue_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The continue option should be set when retrieving more results from the server. Since this value
+       * is server defined, clients may only use the continue value from a previous query result with
+       * identical query parameters (except for the value of continue) and the server may reject a continue
+       * value it does not recognize. If the specified continue value is no longer valid whether due to
+       * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+       * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+       * the continue field. This field is not supported when watch is true. Clients may start a watch from
+       * the last resourceVersion value returned by the server and not miss any modifications.
+       * </pre>
+       *
+       * <code>optional string continue = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContinueBytes() {
+        java.lang.Object ref = continue_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          continue_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The continue option should be set when retrieving more results from the server. Since this value
+       * is server defined, clients may only use the continue value from a previous query result with
+       * identical query parameters (except for the value of continue) and the server may reject a continue
+       * value it does not recognize. If the specified continue value is no longer valid whether due to
+       * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+       * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+       * the continue field. This field is not supported when watch is true. Clients may start a watch from
+       * the last resourceVersion value returned by the server and not miss any modifications.
+       * </pre>
+       *
+       * <code>optional string continue = 8;</code>
+       */
+      public Builder setContinue(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        continue_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The continue option should be set when retrieving more results from the server. Since this value
+       * is server defined, clients may only use the continue value from a previous query result with
+       * identical query parameters (except for the value of continue) and the server may reject a continue
+       * value it does not recognize. If the specified continue value is no longer valid whether due to
+       * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+       * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+       * the continue field. This field is not supported when watch is true. Clients may start a watch from
+       * the last resourceVersion value returned by the server and not miss any modifications.
+       * </pre>
+       *
+       * <code>optional string continue = 8;</code>
+       */
+      public Builder clearContinue() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        continue_ = getDefaultInstance().getContinue();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The continue option should be set when retrieving more results from the server. Since this value
+       * is server defined, clients may only use the continue value from a previous query result with
+       * identical query parameters (except for the value of continue) and the server may reject a continue
+       * value it does not recognize. If the specified continue value is no longer valid whether due to
+       * expiration (generally five to fifteen minutes) or a configuration change on the server the server
+       * will respond with a 410 ResourceExpired error indicating the client must restart their list without
+       * the continue field. This field is not supported when watch is true. Clients may start a watch from
+       * the last resourceVersion value returned by the server and not miss any modifications.
+       * </pre>
+       *
+       * <code>optional string continue = 8;</code>
+       */
+      public Builder setContinueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        continue_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -22096,7 +24644,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ListOptions(input, extensionRegistry);
+        return new ListOptions(input, extensionRegistry);
       }
     };
 
@@ -22198,6 +24746,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -22781,7 +25332,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MicroTime(input, extensionRegistry);
+        return new MicroTime(input, extensionRegistry);
       }
     };
 
@@ -23680,6 +26231,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -28685,7 +31239,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ObjectMeta(input, extensionRegistry);
+        return new ObjectMeta(input, extensionRegistry);
       }
     };
 
@@ -28906,6 +31460,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -30271,7 +32828,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new OwnerReference(input, extensionRegistry);
+        return new OwnerReference(input, extensionRegistry);
       }
     };
 
@@ -30353,6 +32910,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -30894,7 +33454,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Preconditions(input, extensionRegistry);
+        return new Preconditions(input, extensionRegistry);
       }
     };
 
@@ -30983,6 +33543,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -31547,7 +34110,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RootPaths(input, extensionRegistry);
+        return new RootPaths(input, extensionRegistry);
       }
     };
 
@@ -31656,6 +34219,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -32383,7 +34949,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ServerAddressByClientCIDR(input, extensionRegistry);
+        return new ServerAddressByClientCIDR(input, extensionRegistry);
       }
     };
 
@@ -32628,6 +35194,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -34251,7 +36820,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Status(input, extensionRegistry);
+        return new Status(input, extensionRegistry);
       }
     };
 
@@ -34424,6 +36993,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -35446,7 +38018,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StatusCause(input, extensionRegistry);
+        return new StatusCause(input, extensionRegistry);
       }
     };
 
@@ -35656,7 +38228,9 @@ public final class Meta {
 
     /**
      * <pre>
-     * If specified, the time in seconds before the operation should be retried.
+     * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+     * the client must take an alternate action - for those errors this field may indicate how long to wait
+     * before taking the alternate action.
      * +optional
      * </pre>
      *
@@ -35665,7 +38239,9 @@ public final class Meta {
     boolean hasRetryAfterSeconds();
     /**
      * <pre>
-     * If specified, the time in seconds before the operation should be retried.
+     * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+     * the client must take an alternate action - for those errors this field may indicate how long to wait
+     * before taking the alternate action.
      * +optional
      * </pre>
      *
@@ -35713,6 +38289,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -36109,7 +38688,9 @@ public final class Meta {
     private int retryAfterSeconds_;
     /**
      * <pre>
-     * If specified, the time in seconds before the operation should be retried.
+     * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+     * the client must take an alternate action - for those errors this field may indicate how long to wait
+     * before taking the alternate action.
      * +optional
      * </pre>
      *
@@ -36120,7 +38701,9 @@ public final class Meta {
     }
     /**
      * <pre>
-     * If specified, the time in seconds before the operation should be retried.
+     * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+     * the client must take an alternate action - for those errors this field may indicate how long to wait
+     * before taking the alternate action.
      * +optional
      * </pre>
      *
@@ -37398,7 +39981,9 @@ public final class Meta {
       private int retryAfterSeconds_ ;
       /**
        * <pre>
-       * If specified, the time in seconds before the operation should be retried.
+       * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+       * the client must take an alternate action - for those errors this field may indicate how long to wait
+       * before taking the alternate action.
        * +optional
        * </pre>
        *
@@ -37409,7 +39994,9 @@ public final class Meta {
       }
       /**
        * <pre>
-       * If specified, the time in seconds before the operation should be retried.
+       * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+       * the client must take an alternate action - for those errors this field may indicate how long to wait
+       * before taking the alternate action.
        * +optional
        * </pre>
        *
@@ -37420,7 +40007,9 @@ public final class Meta {
       }
       /**
        * <pre>
-       * If specified, the time in seconds before the operation should be retried.
+       * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+       * the client must take an alternate action - for those errors this field may indicate how long to wait
+       * before taking the alternate action.
        * +optional
        * </pre>
        *
@@ -37434,7 +40023,9 @@ public final class Meta {
       }
       /**
        * <pre>
-       * If specified, the time in seconds before the operation should be retried.
+       * If specified, the time in seconds before the operation should be retried. Some errors may indicate
+       * the client must take an alternate action - for those errors this field may indicate how long to wait
+       * before taking the alternate action.
        * +optional
        * </pre>
        *
@@ -37476,7 +40067,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StatusDetails(input, extensionRegistry);
+        return new StatusDetails(input, extensionRegistry);
       }
     };
 
@@ -37580,6 +40171,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -38165,7 +40759,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Time(input, extensionRegistry);
+        return new Time(input, extensionRegistry);
       }
     };
 
@@ -38265,6 +40859,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -38846,7 +41443,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Timestamp(input, extensionRegistry);
+        return new Timestamp(input, extensionRegistry);
       }
     };
 
@@ -38983,6 +41580,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -39786,7 +42386,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TypeMeta(input, extensionRegistry);
+        return new TypeMeta(input, extensionRegistry);
       }
     };
 
@@ -39861,6 +42461,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -40375,7 +42978,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Verbs(input, extensionRegistry);
+        return new Verbs(input, extensionRegistry);
       }
     };
 
@@ -40483,6 +43086,9 @@ public final class Meta {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -41265,7 +43871,7 @@ public final class Meta {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WatchEvent(input, extensionRegistry);
+        return new WatchEvent(input, extensionRegistry);
       }
     };
 
@@ -41385,6 +43991,11 @@ public final class Meta {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_LabelSelectorRequirement_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListMeta_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -41492,104 +44103,109 @@ public final class Meta {
       "ated.proto\"\251\002\n\010APIGroup\022\014\n\004name\030\001 \001(\t\022P\n" +
       "\010versions\030\002 \003(\0132>.k8s.io.apimachinery.pk" +
       "g.apis.meta.v1.GroupVersionForDiscovery\022" +
-      "X\n\020preferredVersion\030\003 \001(\0132>.k8s.io.apima",
+      "X\n\020preferredVersion\030\003 \001(\0132>.k8s.io.apima" +
       "chinery.pkg.apis.meta.v1.GroupVersionFor" +
       "Discovery\022c\n\032serverAddressByClientCIDRs\030" +
       "\004 \003(\0132?.k8s.io.apimachinery.pkg.apis.met" +
       "a.v1.ServerAddressByClientCIDR\"N\n\014APIGro" +
       "upList\022>\n\006groups\030\001 \003(\0132..k8s.io.apimachi" +
-      "nery.pkg.apis.meta.v1.APIGroup\"\267\001\n\013APIRe" +
+      "nery.pkg.apis.meta.v1.APIGroup\"\327\001\n\013APIRe" +
       "source\022\014\n\004name\030\001 \001(\t\022\024\n\014singularName\030\006 \001" +
-      "(\t\022\022\n\nnamespaced\030\002 \001(\010\022\014\n\004kind\030\003 \001(\t\022:\n\005" +
-      "verbs\030\004 \001(\0132+.k8s.io.apimachinery.pkg.ap" +
-      "is.meta.v1.Verbs\022\022\n\nshortNames\030\005 \003(\t\022\022\n\n",
-      "categories\030\007 \003(\t\"m\n\017APIResourceList\022\024\n\014g" +
-      "roupVersion\030\001 \001(\t\022D\n\tresources\030\002 \003(\01321.k" +
-      "8s.io.apimachinery.pkg.apis.meta.v1.APIR" +
-      "esource\"\204\001\n\013APIVersions\022\020\n\010versions\030\001 \003(" +
-      "\t\022c\n\032serverAddressByClientCIDRs\030\002 \003(\0132?." +
-      "k8s.io.apimachinery.pkg.apis.meta.v1.Ser" +
-      "verAddressByClientCIDR\"\254\001\n\rDeleteOptions" +
-      "\022\032\n\022gracePeriodSeconds\030\001 \001(\003\022J\n\rprecondi" +
-      "tions\030\002 \001(\01323.k8s.io.apimachinery.pkg.ap" +
-      "is.meta.v1.Preconditions\022\030\n\020orphanDepend",
-      "ents\030\003 \001(\010\022\031\n\021propagationPolicy\030\004 \001(\t\"\034\n" +
-      "\010Duration\022\020\n\010duration\030\001 \001(\003\".\n\rExportOpt" +
-      "ions\022\016\n\006export\030\001 \001(\010\022\r\n\005exact\030\002 \001(\010\"C\n\nG" +
-      "etOptions\022\027\n\017resourceVersion\030\001 \001(\t\022\034\n\024in" +
-      "cludeUninitialized\030\002 \001(\010\"(\n\tGroupKind\022\r\n" +
-      "\005group\030\001 \001(\t\022\014\n\004kind\030\002 \001(\t\"0\n\rGroupResou" +
-      "rce\022\r\n\005group\030\001 \001(\t\022\020\n\010resource\030\002 \001(\t\".\n\014" +
-      "GroupVersion\022\r\n\005group\030\001 \001(\t\022\017\n\007version\030\002" +
-      " \001(\t\"A\n\030GroupVersionForDiscovery\022\024\n\014grou" +
-      "pVersion\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\"@\n\020Group",
-      "VersionKind\022\r\n\005group\030\001 \001(\t\022\017\n\007version\030\002 " +
-      "\001(\t\022\014\n\004kind\030\003 \001(\t\"H\n\024GroupVersionResourc" +
-      "e\022\r\n\005group\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\022\020\n\010res" +
-      "ource\030\003 \001(\t\"\033\n\013Initializer\022\014\n\004name\030\001 \001(\t" +
-      "\"\220\001\n\014Initializers\022B\n\007pending\030\001 \003(\01321.k8s" +
-      ".io.apimachinery.pkg.apis.meta.v1.Initia" +
-      "lizer\022<\n\006result\030\002 \001(\0132,.k8s.io.apimachin" +
-      "ery.pkg.apis.meta.v1.Status\"\370\001\n\rLabelSel" +
-      "ector\022Y\n\013matchLabels\030\001 \003(\0132D.k8s.io.apim" +
-      "achinery.pkg.apis.meta.v1.LabelSelector.",
-      "MatchLabelsEntry\022X\n\020matchExpressions\030\002 \003" +
-      "(\0132>.k8s.io.apimachinery.pkg.apis.meta.v" +
-      "1.LabelSelectorRequirement\0322\n\020MatchLabel" +
-      "sEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"I" +
-      "\n\030LabelSelectorRequirement\022\013\n\003key\030\001 \001(\t\022" +
-      "\020\n\010operator\030\002 \001(\t\022\016\n\006values\030\003 \003(\t\"5\n\010Lis" +
-      "tMeta\022\020\n\010selfLink\030\001 \001(\t\022\027\n\017resourceVersi" +
-      "on\030\002 \001(\t\"\231\001\n\013ListOptions\022\025\n\rlabelSelecto" +
-      "r\030\001 \001(\t\022\025\n\rfieldSelector\030\002 \001(\t\022\034\n\024includ" +
-      "eUninitialized\030\006 \001(\010\022\r\n\005watch\030\003 \001(\010\022\027\n\017r",
-      "esourceVersion\030\004 \001(\t\022\026\n\016timeoutSeconds\030\005" +
-      " \001(\003\"+\n\tMicroTime\022\017\n\007seconds\030\001 \001(\003\022\r\n\005na" +
-      "nos\030\002 \001(\005\"\214\006\n\nObjectMeta\022\014\n\004name\030\001 \001(\t\022\024" +
-      "\n\014generateName\030\002 \001(\t\022\021\n\tnamespace\030\003 \001(\t\022" +
-      "\020\n\010selfLink\030\004 \001(\t\022\013\n\003uid\030\005 \001(\t\022\027\n\017resour" +
-      "ceVersion\030\006 \001(\t\022\022\n\ngeneration\030\007 \001(\003\022E\n\021c" +
-      "reationTimestamp\030\010 \001(\0132*.k8s.io.apimachi" +
-      "nery.pkg.apis.meta.v1.Time\022E\n\021deletionTi" +
-      "mestamp\030\t \001(\0132*.k8s.io.apimachinery.pkg." +
-      "apis.meta.v1.Time\022\"\n\032deletionGracePeriod",
-      "Seconds\030\n \001(\003\022L\n\006labels\030\013 \003(\0132<.k8s.io.a" +
-      "pimachinery.pkg.apis.meta.v1.ObjectMeta." +
-      "LabelsEntry\022V\n\013annotations\030\014 \003(\0132A.k8s.i" +
-      "o.apimachinery.pkg.apis.meta.v1.ObjectMe" +
-      "ta.AnnotationsEntry\022M\n\017ownerReferences\030\r" +
-      " \003(\01324.k8s.io.apimachinery.pkg.apis.meta" +
-      ".v1.OwnerReference\022H\n\014initializers\030\020 \001(\013" +
-      "22.k8s.io.apimachinery.pkg.apis.meta.v1." +
-      "Initializers\022\022\n\nfinalizers\030\016 \003(\t\022\023\n\013clus" +
-      "terName\030\017 \001(\t\032-\n\013LabelsEntry\022\013\n\003key\030\001 \001(",
-      "\t\022\r\n\005value\030\002 \001(\t:\0028\001\0322\n\020AnnotationsEntry" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"}\n\016Owne" +
-      "rReference\022\022\n\napiVersion\030\005 \001(\t\022\014\n\004kind\030\001" +
-      " \001(\t\022\014\n\004name\030\003 \001(\t\022\013\n\003uid\030\004 \001(\t\022\022\n\ncontr" +
-      "oller\030\006 \001(\010\022\032\n\022blockOwnerDeletion\030\007 \001(\010\"" +
-      "\034\n\rPreconditions\022\013\n\003uid\030\001 \001(\t\"\032\n\tRootPat" +
-      "hs\022\r\n\005paths\030\001 \003(\t\"F\n\031ServerAddressByClie" +
-      "ntCIDR\022\022\n\nclientCIDR\030\001 \001(\t\022\025\n\rserverAddr" +
-      "ess\030\002 \001(\t\"\317\001\n\006Status\022@\n\010metadata\030\001 \001(\0132." +
-      ".k8s.io.apimachinery.pkg.apis.meta.v1.Li",
-      "stMeta\022\016\n\006status\030\002 \001(\t\022\017\n\007message\030\003 \001(\t\022" +
-      "\016\n\006reason\030\004 \001(\t\022D\n\007details\030\005 \001(\01323.k8s.i" +
-      "o.apimachinery.pkg.apis.meta.v1.StatusDe" +
-      "tails\022\014\n\004code\030\006 \001(\005\"=\n\013StatusCause\022\016\n\006re" +
-      "ason\030\001 \001(\t\022\017\n\007message\030\002 \001(\t\022\r\n\005field\030\003 \001" +
-      "(\t\"\245\001\n\rStatusDetails\022\014\n\004name\030\001 \001(\t\022\r\n\005gr" +
-      "oup\030\002 \001(\t\022\014\n\004kind\030\003 \001(\t\022\013\n\003uid\030\006 \001(\t\022A\n\006" +
-      "causes\030\004 \003(\01321.k8s.io.apimachinery.pkg.a" +
-      "pis.meta.v1.StatusCause\022\031\n\021retryAfterSec" +
-      "onds\030\005 \001(\005\"&\n\004Time\022\017\n\007seconds\030\001 \001(\003\022\r\n\005n",
-      "anos\030\002 \001(\005\"+\n\tTimestamp\022\017\n\007seconds\030\001 \001(\003" +
-      "\022\r\n\005nanos\030\002 \001(\005\",\n\010TypeMeta\022\014\n\004kind\030\001 \001(" +
-      "\t\022\022\n\napiVersion\030\002 \001(\t\"\026\n\005Verbs\022\r\n\005items\030" +
-      "\001 \003(\t\"Y\n\nWatchEvent\022\014\n\004type\030\001 \001(\t\022=\n\006obj" +
-      "ect\030\002 \001(\0132-.k8s.io.apimachinery.pkg.runt" +
-      "ime.RawExtensionB&\n\032io.kubernetes.client" +
-      ".protoB\004MetaZ\002v1"
+      "(\t\022\022\n\nnamespaced\030\002 \001(\010\022\r\n\005group\030\010 \001(\t\022\017\n" +
+      "\007version\030\t \001(\t\022\014\n\004kind\030\003 \001(\t\022:\n\005verbs\030\004 " +
+      "\001(\0132+.k8s.io.apimachinery.pkg.apis.meta." +
+      "v1.Verbs\022\022\n\nshortNames\030\005 \003(\t\022\022\n\ncategori" +
+      "es\030\007 \003(\t\"m\n\017APIResourceList\022\024\n\014groupVers" +
+      "ion\030\001 \001(\t\022D\n\tresources\030\002 \003(\01321.k8s.io.ap" +
+      "imachinery.pkg.apis.meta.v1.APIResource\"" +
+      "\204\001\n\013APIVersions\022\020\n\010versions\030\001 \003(\t\022c\n\032ser" +
+      "verAddressByClientCIDRs\030\002 \003(\0132?.k8s.io.a" +
+      "pimachinery.pkg.apis.meta.v1.ServerAddre" +
+      "ssByClientCIDR\"\254\001\n\rDeleteOptions\022\032\n\022grac" +
+      "ePeriodSeconds\030\001 \001(\003\022J\n\rpreconditions\030\002 " +
+      "\001(\01323.k8s.io.apimachinery.pkg.apis.meta." +
+      "v1.Preconditions\022\030\n\020orphanDependents\030\003 \001" +
+      "(\010\022\031\n\021propagationPolicy\030\004 \001(\t\"\034\n\010Duratio" +
+      "n\022\020\n\010duration\030\001 \001(\003\".\n\rExportOptions\022\016\n\006" +
+      "export\030\001 \001(\010\022\r\n\005exact\030\002 \001(\010\"C\n\nGetOption" +
+      "s\022\027\n\017resourceVersion\030\001 \001(\t\022\034\n\024includeUni" +
+      "nitialized\030\002 \001(\010\"(\n\tGroupKind\022\r\n\005group\030\001" +
+      " \001(\t\022\014\n\004kind\030\002 \001(\t\"0\n\rGroupResource\022\r\n\005g" +
+      "roup\030\001 \001(\t\022\020\n\010resource\030\002 \001(\t\".\n\014GroupVer" +
+      "sion\022\r\n\005group\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\"A\n\030" +
+      "GroupVersionForDiscovery\022\024\n\014groupVersion" +
+      "\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\"@\n\020GroupVersionK" +
+      "ind\022\r\n\005group\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\022\014\n\004k" +
+      "ind\030\003 \001(\t\"H\n\024GroupVersionResource\022\r\n\005gro" +
+      "up\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\022\020\n\010resource\030\003 " +
+      "\001(\t\"\033\n\013Initializer\022\014\n\004name\030\001 \001(\t\"\220\001\n\014Ini" +
+      "tializers\022B\n\007pending\030\001 \003(\01321.k8s.io.apim" +
+      "achinery.pkg.apis.meta.v1.Initializer\022<\n" +
+      "\006result\030\002 \001(\0132,.k8s.io.apimachinery.pkg." +
+      "apis.meta.v1.Status\"\370\001\n\rLabelSelector\022Y\n" +
+      "\013matchLabels\030\001 \003(\0132D.k8s.io.apimachinery" +
+      ".pkg.apis.meta.v1.LabelSelector.MatchLab" +
+      "elsEntry\022X\n\020matchExpressions\030\002 \003(\0132>.k8s" +
+      ".io.apimachinery.pkg.apis.meta.v1.LabelS" +
+      "electorRequirement\0322\n\020MatchLabelsEntry\022\013" +
+      "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"I\n\030LabelS" +
+      "electorRequirement\022\013\n\003key\030\001 \001(\t\022\020\n\010opera" +
+      "tor\030\002 \001(\t\022\016\n\006values\030\003 \003(\t\"\206\001\n\004List\022@\n\010me" +
+      "tadata\030\001 \001(\0132..k8s.io.apimachinery.pkg.a" +
+      "pis.meta.v1.ListMeta\022<\n\005items\030\002 \003(\0132-.k8" +
+      "s.io.apimachinery.pkg.runtime.RawExtensi" +
+      "on\"G\n\010ListMeta\022\020\n\010selfLink\030\001 \001(\t\022\027\n\017reso" +
+      "urceVersion\030\002 \001(\t\022\020\n\010continue\030\003 \001(\t\"\272\001\n\013" +
+      "ListOptions\022\025\n\rlabelSelector\030\001 \001(\t\022\025\n\rfi" +
+      "eldSelector\030\002 \001(\t\022\034\n\024includeUninitialize" +
+      "d\030\006 \001(\010\022\r\n\005watch\030\003 \001(\010\022\027\n\017resourceVersio" +
+      "n\030\004 \001(\t\022\026\n\016timeoutSeconds\030\005 \001(\003\022\r\n\005limit" +
+      "\030\007 \001(\003\022\020\n\010continue\030\010 \001(\t\"+\n\tMicroTime\022\017\n" +
+      "\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005\"\214\006\n\nObject" +
+      "Meta\022\014\n\004name\030\001 \001(\t\022\024\n\014generateName\030\002 \001(\t" +
+      "\022\021\n\tnamespace\030\003 \001(\t\022\020\n\010selfLink\030\004 \001(\t\022\013\n" +
+      "\003uid\030\005 \001(\t\022\027\n\017resourceVersion\030\006 \001(\t\022\022\n\ng" +
+      "eneration\030\007 \001(\003\022E\n\021creationTimestamp\030\010 \001" +
+      "(\0132*.k8s.io.apimachinery.pkg.apis.meta.v" +
+      "1.Time\022E\n\021deletionTimestamp\030\t \001(\0132*.k8s." +
+      "io.apimachinery.pkg.apis.meta.v1.Time\022\"\n" +
+      "\032deletionGracePeriodSeconds\030\n \001(\003\022L\n\006lab" +
+      "els\030\013 \003(\0132<.k8s.io.apimachinery.pkg.apis" +
+      ".meta.v1.ObjectMeta.LabelsEntry\022V\n\013annot" +
+      "ations\030\014 \003(\0132A.k8s.io.apimachinery.pkg.a" +
+      "pis.meta.v1.ObjectMeta.AnnotationsEntry\022" +
+      "M\n\017ownerReferences\030\r \003(\01324.k8s.io.apimac" +
+      "hinery.pkg.apis.meta.v1.OwnerReference\022H" +
+      "\n\014initializers\030\020 \001(\01322.k8s.io.apimachine" +
+      "ry.pkg.apis.meta.v1.Initializers\022\022\n\nfina" +
+      "lizers\030\016 \003(\t\022\023\n\013clusterName\030\017 \001(\t\032-\n\013Lab" +
+      "elsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001" +
+      "\0322\n\020AnnotationsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
+      "ue\030\002 \001(\t:\0028\001\"}\n\016OwnerReference\022\022\n\napiVer" +
+      "sion\030\005 \001(\t\022\014\n\004kind\030\001 \001(\t\022\014\n\004name\030\003 \001(\t\022\013" +
+      "\n\003uid\030\004 \001(\t\022\022\n\ncontroller\030\006 \001(\010\022\032\n\022block" +
+      "OwnerDeletion\030\007 \001(\010\"\034\n\rPreconditions\022\013\n\003" +
+      "uid\030\001 \001(\t\"\032\n\tRootPaths\022\r\n\005paths\030\001 \003(\t\"F\n" +
+      "\031ServerAddressByClientCIDR\022\022\n\nclientCIDR" +
+      "\030\001 \001(\t\022\025\n\rserverAddress\030\002 \001(\t\"\317\001\n\006Status" +
+      "\022@\n\010metadata\030\001 \001(\0132..k8s.io.apimachinery" +
+      ".pkg.apis.meta.v1.ListMeta\022\016\n\006status\030\002 \001" +
+      "(\t\022\017\n\007message\030\003 \001(\t\022\016\n\006reason\030\004 \001(\t\022D\n\007d" +
+      "etails\030\005 \001(\01323.k8s.io.apimachinery.pkg.a" +
+      "pis.meta.v1.StatusDetails\022\014\n\004code\030\006 \001(\005\"" +
+      "=\n\013StatusCause\022\016\n\006reason\030\001 \001(\t\022\017\n\007messag" +
+      "e\030\002 \001(\t\022\r\n\005field\030\003 \001(\t\"\245\001\n\rStatusDetails" +
+      "\022\014\n\004name\030\001 \001(\t\022\r\n\005group\030\002 \001(\t\022\014\n\004kind\030\003 " +
+      "\001(\t\022\013\n\003uid\030\006 \001(\t\022A\n\006causes\030\004 \003(\01321.k8s.i" +
+      "o.apimachinery.pkg.apis.meta.v1.StatusCa" +
+      "use\022\031\n\021retryAfterSeconds\030\005 \001(\005\"&\n\004Time\022\017" +
+      "\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005\"+\n\tTimest" +
+      "amp\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005\",\n\010T" +
+      "ypeMeta\022\014\n\004kind\030\001 \001(\t\022\022\n\napiVersion\030\002 \001(" +
+      "\t\"\026\n\005Verbs\022\r\n\005items\030\001 \003(\t\"Y\n\nWatchEvent\022" +
+      "\014\n\004type\030\001 \001(\t\022=\n\006object\030\002 \001(\0132-.k8s.io.a" +
+      "pimachinery.pkg.runtime.RawExtensionB&\n\032" +
+      "io.kubernetes.client.protoB\004MetaZ\002v1"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -41623,7 +44239,7 @@ public final class Meta {
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_APIResource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_APIResource_descriptor,
-        new java.lang.String[] { "Name", "SingularName", "Namespaced", "Kind", "Verbs", "ShortNames", "Categories", });
+        new java.lang.String[] { "Name", "SingularName", "Namespaced", "Group", "Version", "Kind", "Verbs", "ShortNames", "Categories", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_APIResourceList_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_APIResourceList_fieldAccessorTable = new
@@ -41726,26 +44342,32 @@ public final class Meta {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_LabelSelectorRequirement_descriptor,
         new java.lang.String[] { "Key", "Operator", "Values", });
-    internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListMeta_descriptor =
+    internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_descriptor =
       getDescriptor().getMessageTypes().get(19);
+    internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_List_descriptor,
+        new java.lang.String[] { "Metadata", "Items", });
+    internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListMeta_descriptor =
+      getDescriptor().getMessageTypes().get(20);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListMeta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListMeta_descriptor,
-        new java.lang.String[] { "SelfLink", "ResourceVersion", });
+        new java.lang.String[] { "SelfLink", "ResourceVersion", "Continue", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListOptions_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListOptions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ListOptions_descriptor,
-        new java.lang.String[] { "LabelSelector", "FieldSelector", "IncludeUninitialized", "Watch", "ResourceVersion", "TimeoutSeconds", });
+        new java.lang.String[] { "LabelSelector", "FieldSelector", "IncludeUninitialized", "Watch", "ResourceVersion", "TimeoutSeconds", "Limit", "Continue", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_MicroTime_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_MicroTime_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_MicroTime_descriptor,
         new java.lang.String[] { "Seconds", "Nanos", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ObjectMeta_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ObjectMeta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ObjectMeta_descriptor,
@@ -41763,73 +44385,73 @@ public final class Meta {
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ObjectMeta_AnnotationsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_OwnerReference_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_OwnerReference_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_OwnerReference_descriptor,
         new java.lang.String[] { "ApiVersion", "Kind", "Name", "Uid", "Controller", "BlockOwnerDeletion", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Preconditions_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Preconditions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Preconditions_descriptor,
         new java.lang.String[] { "Uid", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_RootPaths_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_RootPaths_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_RootPaths_descriptor,
         new java.lang.String[] { "Paths", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ServerAddressByClientCIDR_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ServerAddressByClientCIDR_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_ServerAddressByClientCIDR_descriptor,
         new java.lang.String[] { "ClientCIDR", "ServerAddress", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Status_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Status_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Status_descriptor,
         new java.lang.String[] { "Metadata", "Status", "Message", "Reason", "Details", "Code", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_StatusCause_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_StatusCause_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_StatusCause_descriptor,
         new java.lang.String[] { "Reason", "Message", "Field", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_StatusDetails_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_StatusDetails_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_StatusDetails_descriptor,
         new java.lang.String[] { "Name", "Group", "Kind", "Uid", "Causes", "RetryAfterSeconds", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Time_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Time_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Time_descriptor,
         new java.lang.String[] { "Seconds", "Nanos", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Timestamp_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Timestamp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Timestamp_descriptor,
         new java.lang.String[] { "Seconds", "Nanos", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_TypeMeta_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_TypeMeta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_TypeMeta_descriptor,
         new java.lang.String[] { "Kind", "ApiVersion", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Verbs_descriptor =
-      getDescriptor().getMessageTypes().get(33);
+      getDescriptor().getMessageTypes().get(34);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Verbs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_Verbs_descriptor,
         new java.lang.String[] { "Items", });
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_WatchEvent_descriptor =
-      getDescriptor().getMessageTypes().get(34);
+      getDescriptor().getMessageTypes().get(35);
     internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_WatchEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_k8s_io_apimachinery_pkg_apis_meta_v1_WatchEvent_descriptor,
